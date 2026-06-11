@@ -20,3 +20,11 @@ st.scatter_chart(
     y="Luminosity(L/Lo)",
     color="Star type"      # 별 종류마다 다른 색
 )
+# --- 색 표기 통일: 소문자 + 공백/하이픈 정리 ---
+df["Star color"] = (
+    df["Star color"]
+    .str.strip()              # 앞뒤 공백 제거
+    .str.lower()              # 전부 소문자로
+    .str.replace("-", " ")   # 하이픈을 공백으로
+)
+st.write("정리 후:", df["Star color"].unique())
