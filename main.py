@@ -62,5 +62,31 @@ model.fit(X_train, y_train)
 score = model.score(X_test, y_test)
 st.metric("정확도", f"{score:.1%}")
 
-st.subheader("모델 성적표")
-st.metric("정확도", f"{score:.1%}")
+# --- 사이드바에 입력 슬라이더 ---
+st.sidebar.header("별 정보 입력")
+
+temp = st.sidebar.slider("온도(K)", 2000, 40000, 5000)
+lum  = st.sidebar.slider("밝기", 0.0001, 800000.0, 1.0)
+rad  = st.sidebar.slider("반지름", 0.01, 2000.0, 1.0)
+mag  = st.sidebar.slider("절대등급", -12.0, 20.0, 5.0)
+
+import pandas as pd
+
+# --- 입력값을 모델이 먹을 수 있는 표 한 줄로 만든다 ---
+input_row = pd.DataFrame([{
+    "Temperature (K)": temp,
+    "Luminosity(L/Lo)": lum,
+    "Radius(R/Ro)": rad,
+    "Absolute magnitude(Mv)": mag,
+    "color_num": 0,    # 입문용 단순화
+    "spec_num": 0
+}])
+
+# --- 예측! ---
+pred = model.predict(input_row)[0]
+
+names = ["갈색왜성", "적색왜성", "백색왜성",
+         "주계열성", "초거성", "극대거성"]
+
+st.subheader("예측 결과")
+st.success(f"이 별은 **{names[pred]}** (type {pred}) 입니다!")
