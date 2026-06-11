@@ -54,13 +54,13 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 from sklearn.tree import DecisionTreeClassifier
 
-# --- 모델을 만들고(빈 머리) ---
-model = DecisionTreeClassifier(max_depth=5, random_state=42)
+# --- 슬라이더로 트리 깊이를 조절 ---
+depth = st.slider("트리 깊이 (질문 횟수)", 1, 15, 5)
 
-# --- 연습용 데이터로 가르친다(이 한 줄이 '학습') ---
+model = DecisionTreeClassifier(max_depth=depth, random_state=42)
 model.fit(X_train, y_train)
-# --- 시험용으로 정확도 측정 ---
 score = model.score(X_test, y_test)
+st.metric("정확도", f"{score:.1%}")
 
 st.subheader("모델 성적표")
 st.metric("정확도", f"{score:.1%}")
