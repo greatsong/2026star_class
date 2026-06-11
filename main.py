@@ -19,7 +19,13 @@ fig = px.scatter(df, x="온도", y="절대등급", color="유형명",
 st.plotly_chart(fig)
 
 
-fig2 = px.scatter(df, x="온도", y="절대등급", color="유형명",
-                 title="온도와 밝기로 펼쳐 본 별들 (2D)",
-                 labels={"온도": "표면 온도(K)", "절대등급": "절대등급(작을수록 밝음)"})
-st.plotly_chart(fig2)
+﻿import numpy as np
+df["log반지름"] = np.log10(df["반지름"])
+
+fig = px.scatter_3d(df, x="온도", y="절대등급", z="log반지름",
+                    color="유형명",
+                    title="별 6종을 3D로 펼쳐 보기",
+                    labels={"온도": "표면 온도(K)",
+                            "절대등급": "절대등급(작을수록 밝음)",
+                            "log반지름": "반지름(log10)"})
+st.plotly_chart(fig)
