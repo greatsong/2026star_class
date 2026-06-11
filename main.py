@@ -19,7 +19,7 @@ fig = px.scatter(df, x="온도", y="절대등급", color="유형명",
 st.plotly_chart(fig)
 
 
-﻿import numpy as np
+import numpy as np
 df["log반지름"] = np.log10(df["반지름"])
 
 fig = px.scatter_3d(df, x="온도", y="절대등급", z="log반지름",
