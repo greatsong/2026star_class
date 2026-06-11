@@ -12,3 +12,11 @@ df = pd.read_csv("stars.csv")
 # --- 표 전체를 화면에 보여준다 ---
 st.subheader("데이터 미리보기")
 st.dataframe(df)
+# --- 온도(가로) vs 밝기(세로) 산점도 ---
+st.subheader("온도와 밝기의 관계")
+st.scatter_chart(
+    df,
+    x="Temperature (K)",
+    y="Luminosity(L/Lo)",
+    color="Star type"      # 별 종류마다 다른 색
+)
