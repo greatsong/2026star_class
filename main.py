@@ -31,3 +31,5 @@ fig = px.scatter_3d(df, x="온도", y="절대등급", z="log반지름",
 size = st.slider("점 크기", 2, 12, 4)
 fig.update_traces(marker=dict(size=size))
 st.plotly_chart(fig)
+﻿print("광도 범위:", df["광도"].min(), "~", df["광도"].max())
+print("반지름 범위:", df["반지름"].min(), "~", df["반지름"].max())
