@@ -28,4 +28,5 @@ fig = px.scatter_3d(df, x="온도", y="절대등급", z="log반지름",
                     labels={"온도": "표면 온도(K)",
                             "절대등급": "절대등급(작을수록 밝음)",
                             "log반지름": "반지름(log10)"})
+fig.update_traces(marker=dict(size=4))
 st.plotly_chart(fig)
