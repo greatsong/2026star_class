@@ -28,3 +28,11 @@ df["Star color"] = (
     .str.replace("-", " ")   # 하이픈을 공백으로
 )
 st.write("정리 후:", df["Star color"].unique())
+from sklearn.preprocessing import LabelEncoder
+
+# --- 글자 색·스펙트럼을 숫자로 변환 ---
+color_enc = LabelEncoder()
+spec_enc  = LabelEncoder()
+
+df["color_num"] = color_enc.fit_transform(df["Star color"])
+df["spec_num"]  = spec_enc.fit_transform(df["Spectral Class"])
