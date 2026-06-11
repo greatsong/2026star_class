@@ -1,4 +1,12 @@
-﻿import plotly.express as px
+﻿import pandas as pd
+
+df = pd.read_csv('stars.csv')
+df.columns = ["온도", "광도", "반지름", "절대등급", "유형", "색", "분광형"]
+
+print(df.shape)
+print(df["유형"].value_counts().sort_index())
+
+import plotly.express as px
 import streamlit as st
 
 유형명 = {0:"갈색왜성", 1:"적색왜성", 2:"백색왜성",
